@@ -1,33 +1,16 @@
-Clicks = new Mongo.Collection('clicks');
-
 if (Meteor.isClient) {
-  Template.hello.helpers({
-    counter: function () {
-      return Clicks.findOne({}).total
-    }
-  });
-
-  Template.hello.events({
-    'click button': function () {
-      var click = Clicks.findOne({});
-
-      Clicks.update(click._id, {
-        $inc: {
-          total: 1
-        }
-      });
-    }
+  // This code only runs on the client
+  Template.body.helpers({
+    tasks: [
+      { text: "This is task 1" },
+      { text: "This is task 2" },
+      { text: "This is task 3" }
+    ]
   });
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    var click = Clicks.findOne({});
-
-    if (click == null) {
-      Clicks.insert({
-        total: 0
-      });
-    }
+    //
   });
 }
